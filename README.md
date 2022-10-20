@@ -27,6 +27,6 @@ Ok, let’s get started.
 
 python3 [pain.py](http://pain.py) 
 
-![Untitled](READ%20ME%20fe629548f5244c4fb81607355a928ae2/Untitled.png)
+![Untitled]([READ%20ME%20fe629548f5244c4fb81607355a928ae2/Untitled.png](https://github.com/GavrilenkoA/Python_BI_2022/blob/HW3/Untitled.png))
 
 Window is opened. Congrats!
