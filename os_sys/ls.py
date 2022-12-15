@@ -1,4 +1,4 @@
-# попробую сначала без опции a
+#! /usr/bin/env python3
 # %%
 import argparse
 import os

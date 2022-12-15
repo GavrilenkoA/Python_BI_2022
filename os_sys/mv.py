@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # переименование присходит если файлы в одной директории
 import os
 import sys
