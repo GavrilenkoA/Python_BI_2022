@@ -1,6 +1,5 @@
 # Python_BI_2022
 
-# Python_BI_2022
 Basic linux command on python
 ###### In order to execute all python scripts from  current active environment enter: chmod +x *.py
 ###### 1 mv.py ~ mv
