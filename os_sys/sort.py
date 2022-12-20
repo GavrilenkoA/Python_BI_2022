@@ -1,0 +1,26 @@
+#! /usr/bin/env python3
+
+import argparse
+import sys
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument('file', nargs="*")
+
+args = parser.parse_args()
+
+lines = list()
+
+if len(args.file) == 0:
+    for line in sys.stdin:
+        lines.append(line.strip())
+else:
+    for file in args.file:
+        with open(file, 'r') as inp:
+            for line in inp.readlines():
+                lines.append(line.strip())
+
+for line in sorted(lines, key=lambda x: x.lower()):
+    line = f'{line}\n'
+    sys.stdout.write(line)
+#%%
