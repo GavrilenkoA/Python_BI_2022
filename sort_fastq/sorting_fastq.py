@@ -17,14 +17,7 @@ class Read:
 
     def gc(self):
         read_sequence = self.read_sequence
-
-        def find(ch):
-            if ch == "G" or ch == "C":
-                return 1
-            else:
-                return 0
-
-        gc_content = sum(map(find, read_sequence)) / len(read_sequence)
+        gc_content = sum(map(lambda x: x == "C" or x == "G", read_sequence))/len(read_sequence)
         return gc_content
 
     def mean_quality(self):
@@ -43,40 +36,15 @@ class FASTQFile:
         self.file_path = file_path
 
     def sort_reads(self):
-        def check_duplicate(data):  # проверка на дубликаты
-            unique_data = list(set(data))
-            if len(unique_data) == len(data):  # если длина осталась такая же, то дубликатов нет
-                return False
-            else:  # если длина изменилась(уменьшилась), то есть дубликаты
-                return True
+        stat_per_read = {}   # словарь (статистика рида): объект рида
+        for fastq in self.fastq_records:
+            stat_per_read[(fastq.mean_quality(), len(fastq), fastq.gc(), fastq.read_id)] = fastq
+        stat = [key for key in stat_per_read]   # положим все статистики ридов в виде кортежей в список
+        stat = sorted(stat)     # сортируем кортежи внутри списка
+        for k, i in enumerate(stat):    # вернемся к объектам из сортированных статистик
+            fastq = stat_per_read[i]
+            self.fastq_records[k] = fastq   # изменим исходный атрибут
 
-        def get_quality(read):  # вытаскивание качества
-            quality = read.mean_quality()
-            return quality
-
-        def get_length(read):  # вытаскивание длины
-            length = len(read)
-            return length
-
-        def get_gc(read):  # вытаскивание gc
-            gc = read.gc()
-            return gc
-
-        def get_id(read):  # вытаскивание id
-            idi = read.read_id
-            return idi
-
-        self.fastq_records.sort(key=get_quality)
-        qualities = [get_quality(read) for read in self.fastq_records]
-        if check_duplicate(qualities):  # проверка на повторяющиеся значения, если они есть то сортируем по длине и
-            # так далее...
-            self.fastq_records.sort(key=get_length)
-            lengths = [get_length(read) for read in self.fastq_records]
-            if check_duplicate(lengths):
-                self.fastq_records.sort(key=get_gc)
-                gc_stat = [get_gc(read) for read in self.fastq_records]
-                if check_duplicate(gc_stat):
-                    self.fastq_records.sort(key=get_id)
 
     def write_to_file(self):
         file_path = self.file_path
