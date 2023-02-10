@@ -5,7 +5,7 @@ def process_seq(seq: str):
 
 
 def output_seq(idx_low, seq: str):
-    seq = [ch for ch in seq]
+    seq = list(seq)
     for idx in idx_low:
         seq[idx] = seq[idx].lower()
     seq = "".join(seq)
@@ -52,15 +52,10 @@ def reverse(seq: str):
     rna_alpha = {"A", "U", "G", "C", "a", "u", "g", "c"}
     dna_alpha = {"A", "T", "G", "C", "a", "t", "g", "c"}
     cur_seq = set(seq)
-    val1 = check_acid(cur_seq, rna_alpha)
-    val2 = check_acid(cur_seq, dna_alpha)
+    is_rna = check_acid(cur_seq, rna_alpha)
+    is_dna = check_acid(cur_seq, dna_alpha)
     if val1 or val2:
-        seq = [ch for ch in seq]
-        for i in range(len(seq) // 2):
-            if i != len(seq) // 2:
-                temp = seq[i]
-                seq[i] = seq[len(seq) - i - 1]
-                seq[len(seq) - i - 1] = temp
+        seq = seq[::-1]
         seq = "".join(seq)
         return seq
     else:
