@@ -1,6 +1,6 @@
 #### Iterators and Decorators learning
-####Did
-__1__.My_Dict 
-__2__.iter_append 
-__3__.MyString and MySet
-__6__.GEnonypes
+#### Did
+#### 1. My_Dict 
+#### 2.iter_append 
+#### 3.MyString and MySet
+#### 4. GEnonypes
